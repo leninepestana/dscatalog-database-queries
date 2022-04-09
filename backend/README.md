@@ -3822,7 +3822,7 @@ If we run our login again, remembering that our login has the variables. If we c
 
 # 03-30 Introducing the solved challenge
 
-# 05-22 Preparing the End of Chapter 3 DSCatalog
+# 05-22 Preparing DSCatalog from the End of Chapter 3
 
 # 05-25 Disclaimer - notices about DSCatalog
 
