@@ -3839,7 +3839,7 @@ alter table tb_product_category add constraint FKgbof0jclmaf8wn2alsoexxq3u forei
 alter table tb_user_role add constraint FKea2ootw6b6bb0xt3ptl28bymv foreign key (role_id) references tb_role;
 alter table tb_user_role add constraint FK7vn3h53d0tqdimm8cp45gc0kl foreign key (user_id) references tb_user;
 ```
-Next, open the data.sql from the ***dscatalog*** project to copy the code below, on the ***dscatalog*** database from PostgreSQL
+Next, open the ***data.sql*** from the ***dscatalog*** project to copy the code below, on the ***dscatalog*** database from PostgreSQL
 
 ```sql
 INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Alex', 'Brown', 'alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
