@@ -3913,6 +3913,13 @@ INSERT INTO tb_product_category (product_id, category_id) VALUES (25, 3);
 
 # 05-23 Query methods
 
+# 05-24 Problem N+1 queries with Spring Data JPA
+
+For this topic I create a new repository named
+class_nplus1
+
+- https://github.com/leninepestana/class_nplus1
+
 
 # 05-25 Disclaimer - notices about DSCatalog
 
