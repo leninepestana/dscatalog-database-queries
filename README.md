@@ -569,4 +569,3 @@ jwt.duration
 ```
 
 
-# 05-22 Preparing the End of Chapter 3 DSCatalog
