@@ -566,3 +566,7 @@ security.oauth2.client.client-secret=${CLIENT_SECRET:dscatalog123}
 
 jwt.secret=${JWT_SECRET:MY-JWT-SECRET}
 jwt.duration
+```
+
+
+# 05-22 Preparing the End of Chapter 3 DSCatalog
