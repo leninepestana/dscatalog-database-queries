@@ -3822,6 +3822,18 @@ If we run our login again, remembering that our login has the variables. If we c
 
 # 03-30 Introducing the solved challenge
 
+# 05-25 Disclaimer - notices about DSCatalog
+
+# 05-26 Filter products, INNER JOIN, IN
+
+Filter the product catalog by product and category
+
+I can also not inform the product or inform the category and do a complete search
+
+# 05-22 Preparing the End of Chapter 3 DSCatalog
+
+
+
 
 <a href="https://github.com/leninepestana/bds03">https://github.com/leninepestana/bds03</a>
 
