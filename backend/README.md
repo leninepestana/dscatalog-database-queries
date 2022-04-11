@@ -4135,6 +4135,13 @@ Testing in **Postman** with ***categoryId=3***
     "empty": false
 }
 ```
+
+```SQL
+SELECT * FROM TB_PRODUCT_CATEGORY 
+WHERE CATEGORY_ID = 3
+```
+![category_id](https://user-images.githubusercontent.com/22635013/162698347-8551263b-b7f7-4f96-8a78-77dadd04dd63.PNG)
+
 The top result returned a total of 23 records
 
 ![tb_product_category](https://user-images.githubusercontent.com/22635013/162685201-0309d68c-1491-4b62-b6e1-ecc9fbf7bf1b.PNG)
