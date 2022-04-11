@@ -4196,9 +4196,11 @@ Testing in **Postman** with ***categoryId=1***
 }
 ```
 
-![products_paged_all](https://user-images.githubusercontent.com/22635013/162674722-bc845215-496d-4a27-95db-4c40506fd26b.PNG)
 
-Finally, I will test again searching the products without passing any criteria. Should return all products
+
+Finally, I will test again searching the products without passing any criteria. Should return all ***products***
+
+![products_paged_all](https://user-images.githubusercontent.com/22635013/162674722-bc845215-496d-4a27-95db-4c40506fd26b.PNG)
 
 ![categoriesConsole](https://user-images.githubusercontent.com/22635013/162701649-3b533dcb-3f1e-4b4f-a8f8-541cd1f9e82b.PNG)
 
