@@ -3925,6 +3925,10 @@ For this topic I create a new repository named
 
 # 05-26 Filter products, INNER JOIN, IN
 
+Filter the product catalog by product and category
+
+I can also not inform the product or inform the category and do a complete search
+
 ***ProductController*** class
 
 ```java
@@ -4077,10 +4081,28 @@ When testing in Postman with this implementation, an empty list is returned inst
 When the ***categoryId*** is not informed and it is null, and all categories are searched instead of none. To ensure this. If the category is not passed, it is to show everything, so in the code we have to put that the restriction is true and it is to show all categories
 
 
+```java
+@Query("SELECT obj FROM Product obj INNER JOIN obj.categories cats WHERE "
+			+ ":category IN cats")
+```
 
-Filter the product catalog by product and category
+In the query below, I will get the products and categories where the ***category*** belongs to this product list. 
 
-I can also not inform the product or inform the category and do a complete search
+If the ***category*** is null, it means that It's true that and I'm not restricting nothing, so that what I want is to get all the products regardless of the condition of the category that was not passed, see the code below
+
+```java
+@Query("SELECT obj FROM Product obj INNER JOIN obj.categories cats WHERE "
+			+ "(:category IS NULL OR :category IN cats)")
+	Page<Product> find(Category category, Pageable pageable);
+```
+
+If the category is null, the OR condition will no longer search for any category
+associated with the product, and the condition will be true
+
+
+
+![tb_product_category](https://user-images.githubusercontent.com/22635013/162685201-0309d68c-1491-4b62-b6e1-ecc9fbf7bf1b.PNG)
+
 
 
 <a href="https://github.com/leninepestana/bds03">https://github.com/leninepestana/bds03</a>
