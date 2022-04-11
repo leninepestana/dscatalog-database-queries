@@ -4204,10 +4204,57 @@ Finally, I will test again searching the products without passing any criteria. 
 
 ![categoriesConsole](https://user-images.githubusercontent.com/22635013/162701649-3b533dcb-3f1e-4b4f-a8f8-541cd1f9e82b.PNG)
 
-
+```code
+{
+    "content": [
+        (...)
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 12,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": false,
+    "totalPages": 3,
+    "totalElements": 26,
+    "size": 12,
+    "number": 0,
+    "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+    },
+    "first": true,
+    "numberOfElements": 12,
+    "empty": false
+}
+```
+In fact, it returns all products, but it should return 25 and is returning 26
 
 
 ![tb_product_category](https://user-images.githubusercontent.com/22635013/162685201-0309d68c-1491-4b62-b6e1-ecc9fbf7bf1b.PNG)
+
+
+This is happening because JPQL with JOIN returns repeated rows. Product 2 has 2 categories, so it will appear twice in the query result
+Since when making the query in order to have repetition of products and in the end I only show the products, I will be able to have 
+repeated products if I make the query this way
+
+In order for this not to happen, I have to add the **DISTINCT** clause in the query
+
+```sql
+@Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories cats WHERE "
+			+ "(:category IS NULL OR :category IN cats)")
+	Page<Product> find(Category category, Pageable pageable);
+```
+
+
 
 
 
