@@ -3925,6 +3925,159 @@ For this topic I create a new repository named
 
 # 05-26 Filter products, INNER JOIN, IN
 
+***ProductController*** class
+
+```java
+package com.devsuperior.dscatalog.controller;
+
+import java.net.URI;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.devsuperior.dscatalog.dto.ProductDTO;
+import com.devsuperior.dscatalog.services.ProductService;
+
+@RestController
+@RequestMapping(value = "/products")
+public class ProductController {
+
+	@Autowired
+	private ProductService service;
+	
+	@GetMapping
+	public ResponseEntity<Page<ProductDTO>> findAll(
+			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
+			@RequestParam(value = "name", defaultValue = "") String name,
+			Pageable pageable) {
+		Page<ProductDTO> list = service.findAllPaged(categoryId, pageable);		
+		return ResponseEntity.ok().body(list);
+	}
+
+	(...)
+} 
+```
+
+***ProductService*** class
+
+```java
+package com.devsuperior.dscatalog.services;
+
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.devsuperior.dscatalog.dto.CategoryDTO;
+import com.devsuperior.dscatalog.dto.ProductDTO;
+import com.devsuperior.dscatalog.entities.Category;
+import com.devsuperior.dscatalog.entities.Product;
+import com.devsuperior.dscatalog.repositories.CategoryRepository;
+import com.devsuperior.dscatalog.repositories.ProductRepository;
+import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
+import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
+
+@Service
+public class ProductService {
+
+	@Autowired
+	private ProductRepository repository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
+	@Transactional(readOnly = true)
+	public Page<ProductDTO> findAllPaged(Long categoryId, Pageable pageable) {
+		Category category = (categoryId == 0) ? null :  categoryRepository.getOne(categoryId);
+		Page<Product> list = repository.find(category, pageable);
+		return list.map(x -> new ProductDTO(x));
+	}
+
+	(...)	
+}
+```
+***ProductRepository*** interface
+
+```java
+package com.devsuperior.dscatalog.repositories;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.devsuperior.dscatalog.entities.Category;
+import com.devsuperior.dscatalog.entities.Product;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long> {
+
+	@Query("SELECT obj FROM Product obj INNER JOIN obj.categories cats WHERE "
+			+ ":category IN cats")
+	Page<Product> find(Category category, Pageable pageable);
+}
+```
+When testing in Postman with this implementation, an empty list is returned instead of all categories
+
+![products_paged_all](https://user-images.githubusercontent.com/22635013/162674722-bc845215-496d-4a27-95db-4c40506fd26b.PNG)
+
+```code
+{
+    "content": [],
+    "pageable": {
+        "sort": {
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
+        },
+        "offset": 0,
+        "pageSize": 12,
+        "pageNumber": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": true,
+    "totalElements": 0,
+    "totalPages": 0,
+    "size": 12,
+    "number": 0,
+    "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+    },
+    "first": true,
+    "numberOfElements": 0,
+    "empty": true
+}
+```
+
+When the categoryId is not informed and it is null, and all categories are searched instead of none. To ensure this. If the category is not passed, it is to show everything, so in the code we have to put that the restriction is true and it is to show all categories
+
+
+
 Filter the product catalog by product and category
 
 I can also not inform the product or inform the category and do a complete search
