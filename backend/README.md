@@ -4289,9 +4289,6 @@ In order for this not to happen, I have to add the **DISTINCT** clause in the qu
 
 Now the query returned only the 25 products, as it did not show the repeated products
 
-
-<a href="https://github.com/leninepestana/bds03">https://github.com/leninepestana/bds03</a>
-
 <hr>
 
 Lenine Ferrer de Pestana <br />
