@@ -4144,6 +4144,8 @@ WHERE CATEGORY_ID = 3
 
 The top result returned a total of 23 records
 
+![categoryId1](https://user-images.githubusercontent.com/22635013/162698966-ec0e1cc4-1633-4786-bc8d-073fe704d9e6.PNG)
+
 Testing in **Postman** with ***categoryId=1***
 
 ```code
@@ -4192,7 +4194,7 @@ Testing in **Postman** with ***categoryId=1***
 ```
 
 
-![categoryId1](https://user-images.githubusercontent.com/22635013/162698966-ec0e1cc4-1633-4786-bc8d-073fe704d9e6.PNG)
+
 
 
 
