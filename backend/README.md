@@ -4148,7 +4148,7 @@ Testing in **Postman** with ***categoryId=1***
 
 ![categoryId1](https://user-images.githubusercontent.com/22635013/162698966-ec0e1cc4-1633-4786-bc8d-073fe704d9e6.PNG)
 
-
+![categoryId1console](https://user-images.githubusercontent.com/22635013/162700278-43689e06-00d5-4396-a24c-67d49ba6fa24.PNG)
 
 ```code
 {
