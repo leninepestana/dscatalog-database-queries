@@ -4144,6 +4144,58 @@ WHERE CATEGORY_ID = 3
 
 The top result returned a total of 23 records
 
+Testing in **Postman** with ***categoryId=1***
+
+```code
+{
+    "content": [
+        {
+            "id": 2,
+            "name": "Smart TV",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
+			ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
+			aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
+			eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+			mollit anim id est laborum.",
+            "price": 2190.0,
+            "imgUrl": "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg",
+            "date": "2020-07-14T10:00:00Z",
+            "categories": []
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 12,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 1,
+    "size": 12,
+    "number": 0,
+    "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+    },
+    "first": true,
+    "numberOfElements": 1,
+    "empty": false
+}
+```
+
+
+![categoryId1](https://user-images.githubusercontent.com/22635013/162698966-ec0e1cc4-1633-4786-bc8d-073fe704d9e6.PNG)
+
+
+
 ![tb_product_category](https://user-images.githubusercontent.com/22635013/162685201-0309d68c-1491-4b62-b6e1-ecc9fbf7bf1b.PNG)
 
 
