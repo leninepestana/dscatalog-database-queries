@@ -4254,8 +4254,40 @@ In order for this not to happen, I have to add the **DISTINCT** clause in the qu
 	Page<Product> find(Category category, Pageable pageable);
 ```
 
+```code
+{
+    "content": [
+        (...)
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 12,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": false,
+    "totalElements": 25,
+    "totalPages": 3,
+    "size": 12,
+    "number": 0,
+    "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+    },
+    "first": true,
+    "numberOfElements": 12,
+    "empty": false
+}
+```
 
-
+Now the query returned only the 25 products, as it did not show the repeated products
 
 
 <a href="https://github.com/leninepestana/bds03">https://github.com/leninepestana/bds03</a>
