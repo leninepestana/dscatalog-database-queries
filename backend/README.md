@@ -4074,7 +4074,7 @@ When testing in Postman with this implementation, an empty list is returned inst
 }
 ```
 
-When the categoryId is not informed and it is null, and all categories are searched instead of none. To ensure this. If the category is not passed, it is to show everything, so in the code we have to put that the restriction is true and it is to show all categories
+When the ***categoryId*** is not informed and it is null, and all categories are searched instead of none. To ensure this. If the category is not passed, it is to show everything, so in the code we have to put that the restriction is true and it is to show all categories
 
 
 
