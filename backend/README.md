@@ -4294,6 +4294,9 @@ Now the query returned only the 25 products, as it did not show the repeated pro
 
 # 05-28 Filter Product, FNC, LIKE, LOWER, CONCAT, Trim
 
+![products_paged_filtered](https://user-images.githubusercontent.com/22635013/162900443-40cc0adc-2f24-4a7d-9c34-d62da2ef34b4.PNG)
+
+
 ```java
 package com.devsuperior.dscatalog.controller;
 
