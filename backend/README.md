@@ -4292,6 +4292,34 @@ In order for this not to happen, I have to add the **DISTINCT** clause in the qu
 
 Now the query returned only the 25 products, as it did not show the repeated products
 
+# 05-28 Filter Product, FNC, LIKE, LOWER, CONCAT, Trim
+
+```java
+package com.devsuperior.dscatalog.controller;
+
+(...)
+
+import com.devsuperior.dscatalog.dto.ProductDTO;
+import com.devsuperior.dscatalog.services.ProductService;
+
+@RestController
+@RequestMapping(value = "/products")
+public class ProductController {
+
+	@Autowired
+	private ProductService service;
+	
+	@GetMapping
+	public ResponseEntity<Page<ProductDTO>> findAll(
+			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
+			@RequestParam(value = "name", defaultValue = "") String name,
+			Pageable pageable) {
+		Page<ProductDTO> list = service.findAllPaged(categoryId, name.trim(), pageable);		
+		return ResponseEntity.ok().body(list);
+	}
+```
+
+
 <hr>
 
 Lenine Ferrer de Pestana <br />
