@@ -4204,6 +4204,8 @@ Finally, I will test again searching the products without passing any criteria. 
 
 ![categoriesConsole](https://user-images.githubusercontent.com/22635013/162701649-3b533dcb-3f1e-4b4f-a8f8-541cd1f9e82b.PNG)
 
+**Postmann** result
+
 ```code
 {
     "content": [
@@ -4253,6 +4255,7 @@ In order for this not to happen, I have to add the **DISTINCT** clause in the qu
 			+ "(:category IS NULL OR :category IN cats)")
 	Page<Product> find(Category category, Pageable pageable);
 ```
+**Postmann** result
 
 ```code
 {
