@@ -4296,6 +4296,75 @@ Now the query returned only the 25 products, as it did not show the repeated pro
 
 ![products_paged_filtered](https://user-images.githubusercontent.com/22635013/162900443-40cc0adc-2f24-4a7d-9c34-d62da2ef34b4.PNG)
 
+***ProductRepository*** class implementation
+
+```java
+package com.devsuperior.dscatalog.repositories;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.devsuperior.dscatalog.entities.Category;
+import com.devsuperior.dscatalog.entities.Product;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long> {
+
+	@Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories cats WHERE "
+			+ "(:category IS NULL OR :category IN cats) AND "
+			+ "(LOWER(obj.name) LIKE LOWER(CONCAT('%',:name,'%')) )")
+	Page<Product> find(Category category, String name, Pageable pageable);
+}
+```
+
+***ProductService*** excert class implementation
+
+```java
+package com.devsuperior.dscatalog.services;
+
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.devsuperior.dscatalog.dto.CategoryDTO;
+import com.devsuperior.dscatalog.dto.ProductDTO;
+import com.devsuperior.dscatalog.entities.Category;
+import com.devsuperior.dscatalog.entities.Product;
+import com.devsuperior.dscatalog.repositories.CategoryRepository;
+import com.devsuperior.dscatalog.repositories.ProductRepository;
+import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
+import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
+
+@Service
+public class ProductService {
+
+	@Autowired
+	private ProductRepository repository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
+	@Transactional(readOnly = true)
+	public Page<ProductDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
+		Category category = (categoryId == 0) ? null :  categoryRepository.getOne(categoryId);
+		Page<Product> list = repository.find(category, name, pageable);
+		return list.map(x -> new ProductDTO(x));
+	}
+```
+
+
+***ProductController*** excert class implementation
 
 ```java
 package com.devsuperior.dscatalog.controller;
